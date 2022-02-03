@@ -1,8 +1,3 @@
-enum ActionKind {
-    Walking,
-    Idle,
-    Jumping
-}
 namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
@@ -166,14 +161,40 @@ function batHeroFly () {
         . . . . . . f f f f f f f . . . 
         `)
 }
+function talkFriend (who: Sprite, thing: boolean, quest: boolean) {
+    if (heroBat.overlapsWith(who) && controller.A.isPressed()) {
+        if (thing == true) {
+            if (quest == false) {
+                questsDone += 1
+                who.sayText("Thank you!", 500, false)
+                who.startEffect(effects.hearts, 500)
+                currentItem = 0
+                quest = true
+            } else {
+                who.startEffect(effects.hearts, 500)
+            }
+        } else if (currentItem == 0 && thing == false) {
+            who.sayText("Please bring me a burger.", 500, false)
+        } else {
+            who.sayText("What is this? :(")
+        }
+    }
+}
 let facingRight = false
 let facingLeft = false
+let quest = false
+let questsDone = 0
 let MainFlyRight: animation.Animation = null
 let mainFlyLeft: animation.Animation = null
 let hasBurger = false
 let currentItem = 0
 let burger: Sprite = null
 let heroBat: Sprite = null
+class ActionKind {
+    static Walking = 0
+    static Idle = 1
+    static Jumping = 2
+}
 heroBat = sprites.create(img`
     . . f f f . . . . . . . . f f f 
     . f f c c . . . . . . f c b b c 
@@ -239,27 +260,10 @@ burger = sprites.create(img`
     `, SpriteKind.Item)
 burger.setPosition(43, 36)
 currentItem = 0
-let questsDone = 0
 let ghostDone = false
 hasBurger = false
 game.onUpdate(function () {
-    if (heroBat.overlapsWith(ghostFriend) && controller.A.isPressed()) {
-        if (hasBurger == true) {
-            if (ghostDone == false) {
-                questsDone += 1
-                ghostFriend.sayText("Thank you!", 500, false)
-                ghostFriend.startEffect(effects.hearts, 500)
-                currentItem = 0
-                ghostDone = true
-            } else {
-                ghostFriend.startEffect(effects.hearts, 500)
-            }
-        } else if (currentItem == 0 && hasBurger == false) {
-            ghostFriend.sayText("Please bring me a burger.", 500, false)
-        } else {
-            ghostFriend.sayText("What is this? :(")
-        }
-    }
+    talkFriend(ghostFriend, hasBurger, ghostDone)
 })
 game.onUpdate(function () {
     if (heroBat.vx < 0) {
