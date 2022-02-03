@@ -8,7 +8,13 @@ namespace SpriteKind {
     export const Item = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
-	
+    if (currentItem > 0) {
+        otherSprite.sayText("no picking up more than one item!")
+    } else if (otherSprite == burger) {
+        otherSprite.destroy()
+        currentItem += 1
+        hasBurger = true
+    }
 })
 function batHeroFly () {
     mainFlyLeft = animation.createAnimation(ActionKind.Walking, 100)
@@ -164,6 +170,9 @@ let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
 let mainFlyLeft: animation.Animation = null
+let hasBurger = false
+let currentItem = 0
+let burger: Sprite = null
 let heroBat: Sprite = null
 heroBat = sprites.create(img`
     . . f f f . . . . . . . . f f f 
@@ -210,13 +219,42 @@ let ghostFriend = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.Friend)
-let currentItem = 0
+burger = sprites.create(img`
+    . . . . c c c b b b b b . . . . 
+    . . c c b 4 4 4 4 4 4 b b b . . 
+    . c c 4 4 4 4 4 5 4 4 4 4 b c . 
+    . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
+    e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
+    e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
+    e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
+    . e b 4 4 4 4 4 5 4 4 4 4 b e . 
+    8 7 e e b 4 4 4 4 4 4 b e e 6 8 
+    8 7 2 e e e e e e e e e e 2 7 8 
+    e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
+    e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
+    e b e 8 8 c c 8 8 c c c 8 e b e 
+    e e b e c c e e e e e c e b e e 
+    . e e b b 4 4 4 4 4 4 4 4 e e . 
+    . . . c c c c c e e e e e . . . 
+    `, SpriteKind.Item)
+burger.setPosition(43, 36)
+currentItem = 0
 let questsDone = 0
+let ghostDone = false
+hasBurger = false
 game.onUpdate(function () {
     if (heroBat.overlapsWith(ghostFriend) && controller.A.isPressed()) {
-        if (currentItem == 1) {
-            questsDone += 1
-        } else if (currentItem == 0) {
+        if (hasBurger == true) {
+            if (ghostDone == false) {
+                questsDone += 1
+                ghostFriend.sayText("Thank you!", 500, false)
+                ghostFriend.startEffect(effects.hearts, 500)
+                currentItem = 0
+                ghostDone = true
+            } else {
+                ghostFriend.startEffect(effects.hearts, 500)
+            }
+        } else if (currentItem == 0 && hasBurger == false) {
             ghostFriend.sayText("Please bring me a burger.", 500, false)
         } else {
             ghostFriend.sayText("What is this? :(")
