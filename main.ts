@@ -3,13 +3,20 @@ namespace SpriteKind {
     export const Item = SpriteKind.create()
 }
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
-    if (currentItem > 0) {
-        otherSprite.sayText("no picking up more than one item!")
+    if (currentItem == true) {
+        otherSprite.sayText("no picking up more than one item!", 500, false)
     } else if (otherSprite == burger) {
         otherSprite.destroy()
-        currentItem += 1
+        currentItem = true
         hasBurger = true
+    } else if (otherSprite == pizza) {
+        otherSprite.destroy()
+        currentItem = true
+        hasPizza = true
     }
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    game.splash("You have " + convertToText(questsDone) + "/3 quests done.")
 })
 function batHeroFly () {
     mainFlyLeft = animation.createAnimation(ActionKind.Walking, 100)
@@ -168,27 +175,44 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean) {
                 questsDone += 1
                 who.sayText("Thank you!", 500, false)
                 who.startEffect(effects.hearts, 500)
-                currentItem = 0
-                quest = true
+                currentItem = false
+                if (who == ghostFriend) {
+                    ghostDone = true
+                } else if (who == duckFriend) {
+                    duckDone = true
+                }
             } else {
                 who.startEffect(effects.hearts, 500)
             }
-        } else if (currentItem == 0 && thing == false) {
-            who.sayText("Please bring me a burger.", 500, false)
+        } else if (currentItem == false && thing == false) {
+            if (who == ghostFriend) {
+                who.sayText("Please bring me a burger.", 500, false)
+                talkGhost = true
+            } else if (who == duckFriend) {
+                who.sayText("I want pizza!", 500, false)
+                talkDuck = true
+            }
         } else {
-            who.sayText("What is this? :(")
+            who.sayText("What is this? :(", 500, false)
         }
     }
 }
 let facingRight = false
 let facingLeft = false
-let quest = false
-let questsDone = 0
 let MainFlyRight: animation.Animation = null
 let mainFlyLeft: animation.Animation = null
+let talkDuck = false
+let talkGhost = false
+let duckDone = false
+let hasPizza = false
 let hasBurger = false
-let currentItem = 0
+let ghostDone = false
+let currentItem = false
+let questsDone = 0
+let pizza: Sprite = null
 let burger: Sprite = null
+let duckFriend: Sprite = null
+let ghostFriend: Sprite = null
 let heroBat: Sprite = null
 class ActionKind {
     static Walking = 0
@@ -214,7 +238,7 @@ heroBat = sprites.create(img`
     . . . f f f f f f f . . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(heroBat)
-let ghostFriend = sprites.create(img`
+ghostFriend = sprites.create(img`
     ........................
     ........................
     ........................
@@ -240,6 +264,26 @@ let ghostFriend = sprites.create(img`
     ........................
     ........................
     `, SpriteKind.Friend)
+ghostFriend.setPosition(60, 70)
+duckFriend = sprites.create(img`
+    . . . . . . . . . . b 5 b . . . 
+    . . . . . . . . . b 5 b . . . . 
+    . . . . . . . . . b c . . . . . 
+    . . . . . . b b b b b b . . . . 
+    . . . . . b b 5 5 5 5 5 b . . . 
+    . . . . b b 5 d 1 f 5 5 d f . . 
+    . . . . b 5 5 1 f f 5 d 4 c . . 
+    . . . . b 5 5 d f b d d 4 4 . . 
+    b d d d b b d 5 5 5 4 4 4 4 4 b 
+    b b d 5 5 5 b 5 5 4 4 4 4 4 b . 
+    b d c 5 5 5 5 d 5 5 5 5 5 b . . 
+    c d d c d 5 5 b 5 5 5 5 5 5 b . 
+    c b d d c c b 5 5 5 5 5 5 5 b . 
+    . c d d d d d d 5 5 5 5 5 d b . 
+    . . c b d d d d d 5 5 5 b b . . 
+    . . . c c c c c c c c b b . . . 
+    `, SpriteKind.Player)
+duckFriend.setPosition(118, 29)
 burger = sprites.create(img`
     . . . . c c c b b b b b . . . . 
     . . c c b 4 4 4 4 4 4 b b b . . 
@@ -259,11 +303,36 @@ burger = sprites.create(img`
     . . . c c c c c e e e e e . . . 
     `, SpriteKind.Item)
 burger.setPosition(43, 36)
-currentItem = 0
-let ghostDone = false
+pizza = sprites.create(img`
+    . . . . . . b b b b . . . . . . 
+    . . . . . . b 4 4 4 b . . . . . 
+    . . . . . . b b 4 4 4 b . . . . 
+    . . . . . b 4 b b b 4 4 b . . . 
+    . . . . b d 5 5 5 4 b 4 4 b . . 
+    . . . . b 3 2 3 5 5 4 e 4 4 b . 
+    . . . b d 2 2 2 5 7 5 4 e 4 4 e 
+    . . . b 5 3 2 3 5 5 5 5 e e e e 
+    . . b d 7 5 5 5 3 2 3 5 5 e e e 
+    . . b 5 5 5 5 5 2 2 2 5 5 d e e 
+    . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
+    . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
+    b d 3 2 d 5 5 5 d d d 4 4 . . . 
+    b 5 5 5 5 d d 4 4 4 4 . . . . . 
+    4 d d d 4 4 4 . . . . . . . . . 
+    4 4 4 4 . . . . . . . . . . . . 
+    `, SpriteKind.Item)
+pizza.setPosition(122, 101)
+questsDone = 0
+currentItem = false
+ghostDone = false
 hasBurger = false
+hasPizza = false
+duckDone = false
+talkGhost = false
+talkDuck = false
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone)
+    talkFriend(duckFriend, hasPizza, duckDone)
 })
 game.onUpdate(function () {
     if (heroBat.vx < 0) {
