@@ -175,6 +175,7 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean) {
                 questsDone += 1
                 who.sayText("Thank you!", 500, false)
                 who.startEffect(effects.hearts, 500)
+                pause(200)
                 currentItem = false
                 if (who == ghostFriend) {
                     ghostDone = true
@@ -182,7 +183,13 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean) {
                     duckDone = true
                 }
             } else {
-                who.startEffect(effects.hearts, 500)
+                if (Math.percentChance(50)) {
+                    who.sayText(friendText._pickRandom())
+                    who.startEffect(effects.hearts, 500)
+                    pause(200)
+                } else {
+                    who.startEffect(effects.hearts, 500)
+                }
             }
         } else if (currentItem == false && thing == false) {
             if (who == ghostFriend) {
@@ -201,6 +208,7 @@ let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
 let mainFlyLeft: animation.Animation = null
+let friendText: string[] = []
 let talkDuck = false
 let talkGhost = false
 let duckDone = false
@@ -330,6 +338,14 @@ hasPizza = false
 duckDone = false
 talkGhost = false
 talkDuck = false
+friendText = [
+"Hi friend!",
+"Hey! :)",
+":)",
+"",
+":D",
+"<3"
+]
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone)
     talkFriend(duckFriend, hasPizza, duckDone)
