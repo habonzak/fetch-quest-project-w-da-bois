@@ -288,7 +288,7 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
                 talkSnake = true
             }
         } else {
-            who.sayText("What is this? :(", 500, false)
+            who.sayText(rejectText._pickRandom(), 500, false)
             pause(200)
             if (hasBurger == true) {
                 createBurger()
@@ -314,6 +314,7 @@ let hasBurger = false
 let cake: Sprite = null
 let pizza: Sprite = null
 let burger: Sprite = null
+let rejectText: string[] = []
 let friendText: string[] = []
 let talkSnake = false
 let talkDuck = false
@@ -433,6 +434,13 @@ friendText = [
 ":)",
 ":D",
 "<3"
+]
+rejectText = [
+"Ew.",
+"Yuck!",
+"What is this? :(",
+"Gross :(",
+"I don't like this."
 ]
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
