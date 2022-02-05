@@ -431,7 +431,6 @@ friendText = [
 "Hi friend!",
 "Hey! :)",
 ":)",
-"",
 ":D",
 "<3"
 ]
