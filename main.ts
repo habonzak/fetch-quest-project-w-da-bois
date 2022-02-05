@@ -13,6 +13,10 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSpr
         otherSprite.destroy()
         currentItem = true
         hasPizza = true
+    } else if (otherSprite == cake) {
+        otherSprite.destroy()
+        currentItem = true
+        hasCake = true
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -212,6 +216,28 @@ function batHeroFly () {
         . . . . . . f f f f f f f . . . 
         `)
 }
+function createCake () {
+    cake = sprites.create(img`
+        . . . . . . . . . . b b b . . . 
+        . . . . . . . . b e e 3 3 b . . 
+        . . . . . . b b e 3 2 e 3 a . . 
+        . . . . b b 3 3 e 2 2 e 3 3 a . 
+        . . b b 3 3 3 3 3 e e 3 3 3 a . 
+        b b 3 3 3 3 3 3 3 3 3 3 3 3 3 a 
+        b 3 3 3 d d d d 3 3 3 3 3 d d a 
+        b b b b b b b 3 d d d d d d 3 a 
+        b d 5 5 5 5 d b b b a a a a a a 
+        b 3 d d 5 5 5 5 5 5 5 d d d d a 
+        b 3 3 3 3 3 3 d 5 5 5 d d d d a 
+        b 3 d 5 5 5 3 3 3 3 3 3 b b b a 
+        b b b 3 d 5 5 5 5 5 5 5 d d b a 
+        . . . b b b 3 d 5 5 5 5 d d 3 a 
+        . . . . . . b b b b 3 d d d b a 
+        . . . . . . . . . . b b b a a . 
+        `, SpriteKind.Item)
+    cake.setPosition(31, 88)
+    hasCake = false
+}
 function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
     if (heroBat.overlapsWith(who) && controller.A.isPressed()) {
         heroBat.setFlag(SpriteFlag.Ghost, true)
@@ -222,6 +248,9 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
             } else if (who == duckFriend) {
                 who.sayText("I want pizza!", 500, false)
                 talkDuck = true
+            } else if (who == snakeFriend) {
+                who.sayText("Get me a cake ssslice...", 500, false)
+                talkSnake = true
             }
             pause(200)
         } else if (thing == true) {
@@ -235,6 +264,8 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
                     ghostDone = true
                 } else if (who == duckFriend) {
                     duckDone = true
+                } else if (who == snakeFriend) {
+                    snakeDone = true
                 }
             } else {
                 if (Math.percentChance(50)) {
@@ -252,6 +283,9 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
             } else if (who == duckFriend) {
                 who.sayText("I want pizza!", 500, false)
                 talkDuck = true
+            } else if (who == snakeFriend) {
+                who.sayText("GIVE ME CAKE!", 500, false)
+                talkSnake = true
             }
         } else {
             who.sayText("What is this? :(", 500, false)
@@ -262,6 +296,9 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
             } else if (hasPizza == true) {
                 createPizza()
                 currentItem = false
+            } else if (hasCake == true) {
+                createCake()
+                currentItem = false
             }
         }
         heroBat.setFlag(SpriteFlag.Ghost, false)
@@ -271,17 +308,22 @@ let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
 let mainFlyLeft: animation.Animation = null
+let hasCake = false
 let hasPizza = false
 let hasBurger = false
+let cake: Sprite = null
 let pizza: Sprite = null
 let burger: Sprite = null
 let friendText: string[] = []
+let talkSnake = false
 let talkDuck = false
 let talkGhost = false
+let snakeDone = false
 let duckDone = false
 let ghostDone = false
 let currentItem = false
 let questsDone = 0
+let snakeFriend: Sprite = null
 let duckFriend: Sprite = null
 let ghostFriend: Sprite = null
 let heroBat: Sprite = null
@@ -353,16 +395,38 @@ duckFriend = sprites.create(img`
     . c d d d d d d 5 5 5 5 5 d b . 
     . . c b d d d d d 5 5 5 b b . . 
     . . . c c c c c c c c b b . . . 
-    `, SpriteKind.Player)
+    `, SpriteKind.Friend)
 duckFriend.setPosition(118, 29)
+snakeFriend = sprites.create(img`
+    . . . . c c c c c c . . . . . . 
+    . . . c 6 7 7 7 7 6 c . . . . . 
+    . . c 7 7 7 7 7 7 7 7 c . . . . 
+    . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+    . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+    . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+    . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+    . . f 7 7 7 7 6 c 7 7 6 f c . . 
+    . . . f c c c c 7 7 6 f 7 7 c . 
+    . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+    . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+    c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+    f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+    f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+    . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+    . . c c c c c c c c c f . . . . 
+    `, SpriteKind.Friend)
+snakeFriend.setPosition(114, 55)
 createBurger()
 createPizza()
+createCake()
 questsDone = 0
 currentItem = false
 ghostDone = false
 duckDone = false
+snakeDone = false
 talkGhost = false
 talkDuck = false
+talkSnake = false
 friendText = [
 "Hi friend!",
 "Hey! :)",
@@ -374,6 +438,7 @@ friendText = [
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
     talkFriend(duckFriend, hasPizza, duckDone, talkDuck)
+    talkFriend(snakeFriend, hasCake, snakeDone, talkSnake)
 })
 game.onUpdate(function () {
     if (heroBat.vx < 0) {
