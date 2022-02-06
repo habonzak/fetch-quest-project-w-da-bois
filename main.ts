@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
 }
+// picking up items
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
     if (currentItem == true) {
         otherSprite.sayText("no picking up more than one item!", 500, false)
@@ -19,9 +20,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSpr
         hasCake = true
     }
 })
+// checks completed quests
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     game.splash("You have " + convertToText(questsDone) + "/3 quests done.")
 })
+// creates or resets items
 function createPizza () {
     pizza = sprites.create(img`
         . . . . . . b b b b . . . . . . 
@@ -238,9 +241,14 @@ function createCake () {
     cake.setPosition(31, 88)
     hasCake = false
 }
+// talk to friend sprite
 function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
     if (heroBat.overlapsWith(who) && controller.A.isPressed()) {
         heroBat.setFlag(SpriteFlag.Ghost, true)
+        // has item, has not talked to sprite yet
+        // giving item to sprite
+        // has no items
+        // has wrong item
         if (chat == false && thing == true) {
             if (who == ghostFriend) {
                 who.sayText("Please bring me a burger.", 500, false)
@@ -254,6 +262,8 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
             }
             pause(200)
         } else if (thing == true) {
+            // quest not done
+            // quest already done
             if (quest == false) {
                 questsDone += 1
                 who.sayText("Thank you!", 500, false)
@@ -304,6 +314,9 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
         heroBat.setFlag(SpriteFlag.Ghost, false)
     }
 }
+/**
+ * ?
+ */
 let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
@@ -333,6 +346,7 @@ class ActionKind {
     static Idle = 1
     static Jumping = 2
 }
+// initialize sprites
 heroBat = sprites.create(img`
     . . f f f . . . . . . . . f f f 
     . f f c c . . . . . . f c b b c 
@@ -420,6 +434,7 @@ snakeFriend.setPosition(114, 55)
 createBurger()
 createPizza()
 createCake()
+// set variables
 questsDone = 0
 currentItem = false
 ghostDone = false
@@ -442,6 +457,7 @@ rejectText = [
 "Gross :(",
 "I don't like this."
 ]
+// calls functions
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
     talkFriend(duckFriend, hasPizza, duckDone, talkDuck)
