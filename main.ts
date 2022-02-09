@@ -2,6 +2,9 @@ namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
 }
+/**
+ * ?
+ */
 // picking up items
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
     if (currentItem == true) {
@@ -22,7 +25,15 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSpr
 })
 // checks completed quests
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    game.splash("You have " + convertToText(questsDone) + "/3 quests done.")
+    if (hasBurger == true && ghostDone == false) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding a burger.")
+    } else if (hasPizza == true && duckDone == false) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding pizza.")
+    } else if (hasCake == true && snakeDone == false) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding cake.")
+    } else {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding nothing.")
+    }
 })
 // creates or resets items
 function createPizza () {
@@ -314,9 +325,6 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
         heroBat.setFlag(SpriteFlag.Ghost, false)
     }
 }
-/**
- * ?
- */
 let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
