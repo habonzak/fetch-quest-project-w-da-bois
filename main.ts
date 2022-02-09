@@ -7,15 +7,6 @@ namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
-    if (currentItem > 0) {
-        otherSprite.sayText("no picking up more than one item!")
-    } else if (otherSprite == burger) {
-        otherSprite.destroy()
-        currentItem += 1
-        hasBurger = true
-    }
-})
 function initilizeBackgound () {
     tiles.setTilemap(tilemap`level1`)
     scene.setBackgroundImage(img`
@@ -141,74 +132,3 @@ function initilizeBackgound () {
         ................................................................................................................................................................
         `)
 }
-let hasBurger = false
-let currentItem = 0
-let burger: Sprite = null
-initilizeBackgound()
-let heroBat = sprites.create(img`
-    . . f f f . . . . . . . . f f f 
-    . f f c c . . . . . . f c b b c 
-    f f c c . . . . . . f c b b c . 
-    f c f c . . . . . . f b c c c . 
-    f f f c c . c c . f c b b c c . 
-    f f c 3 c c 3 c c f b c b b c . 
-    f f b 3 b c 3 b c f b c c b c . 
-    . c b b b b b b c b b c c c . . 
-    . c 1 b b b 1 b b c c c c . . . 
-    c b b b b b b b b b c c . . . . 
-    c b c b b b c b b b b f . . . . 
-    f b 1 f f f 1 b b b b f c . . . 
-    f b b b b b b b b b b f c c . . 
-    . f b b b b b b b b c f . . . . 
-    . . f b b b b b b c f . . . . . 
-    . . . f f f f f f f . . . . . . 
-    `, SpriteKind.Player)
-scene.cameraFollowSprite(heroBat)
-controller.moveSprite(heroBat)
-let ghostFriend = sprites.create(img`
-    ........................
-    ........................
-    ........................
-    ........................
-    ..........ffff..........
-    ........ff1111ff........
-    .......fb111111bf.......
-    .......f11111111f.......
-    ......fd11111111df......
-    ......fd11111111df......
-    ......fddd1111dddf......
-    ......fbdbfddfbdbf......
-    ......fcdcf11fcdcf......
-    .......fb111111bf.......
-    ......fffcdb1bdffff.....
-    ....fc111cbfbfc111cf....
-    ....f1b1b1ffff1b1b1f....
-    ....fbfbffffffbfbfbf....
-    .........ffffff.........
-    ...........fff..........
-    ........................
-    ........................
-    ........................
-    ........................
-    `, SpriteKind.Friend)
-burger = sprites.create(img`
-    . . . . c c c b b b b b . . . . 
-    . . c c b 4 4 4 4 4 4 b b b . . 
-    . c c 4 4 4 4 4 5 4 4 4 4 b c . 
-    . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
-    e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
-    e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
-    e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
-    . e b 4 4 4 4 4 5 4 4 4 4 b e . 
-    8 7 e e b 4 4 4 4 4 4 b e e 6 8 
-    8 7 2 e e e e e e e e e e 2 7 8 
-    e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
-    e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
-    e b e 8 8 c c 8 8 c c c 8 e b e 
-    e e b e c c e e e e e c e b e e 
-    . e e b b 4 4 4 4 4 4 4 4 e e . 
-    . . . c c c c c e e e e e . . . 
-    `, SpriteKind.Item)
-burger.setPosition(43, 36)
-currentItem = 0
-hasBurger = false
