@@ -300,13 +300,13 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
         } else {
             who.sayText(rejectText._pickRandom(), 500, false)
             pause(200)
-            if (hasBurger == true) {
+            if (hasBurger == true && ghostDone == false) {
                 createBurger()
                 currentItem = false
-            } else if (hasPizza == true) {
+            } else if (hasPizza == true && duckDone == false) {
                 createPizza()
                 currentItem = false
-            } else if (hasCake == true) {
+            } else if (hasCake == true && snakeDone == false) {
                 createCake()
                 currentItem = false
             }
