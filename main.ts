@@ -322,9 +322,6 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
         heroBat.setFlag(SpriteFlag.Ghost, false)
     }
 }
-/**
- * ?
- */
 let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
