@@ -141,8 +141,6 @@ function initilizeBackgound () {
         ................................................................................................................................................................
         `)
 }
-let questsDone = 0
-let ghostDone = false
 let hasBurger = false
 let currentItem = 0
 let burger: Sprite = null
@@ -214,22 +212,3 @@ burger = sprites.create(img`
 burger.setPosition(43, 36)
 currentItem = 0
 hasBurger = false
-game.onUpdate(function () {
-    if (heroBat.overlapsWith(ghostFriend) && controller.A.isPressed()) {
-        if (hasBurger == true) {
-            if (ghostDone == false) {
-                questsDone += 1
-                ghostFriend.sayText("Thank you!", 500, false)
-                ghostFriend.startEffect(effects.hearts, 500)
-                currentItem = 0
-                ghostDone = true
-            } else {
-                ghostFriend.startEffect(effects.hearts, 500)
-            }
-        } else if (currentItem == 0 && hasBurger == false) {
-            ghostFriend.sayText("Please bring me a burger.", 500, false)
-        } else {
-            ghostFriend.sayText("What is this? :(")
-        }
-    }
-})
