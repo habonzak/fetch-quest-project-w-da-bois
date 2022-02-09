@@ -2,9 +2,6 @@ namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
 }
-/**
- * ?
- */
 // picking up items
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
     if (currentItem == true) {
