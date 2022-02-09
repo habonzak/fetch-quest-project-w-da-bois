@@ -249,6 +249,9 @@ function createCake () {
     cake.setPosition(31, 88)
     hasCake = false
 }
+function initializeBackground () {
+    tiles.setCurrentTilemap(tilemap`level1`)
+}
 // talk to friend sprite
 function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
     if (heroBat.overlapsWith(who) && controller.A.isPressed()) {
@@ -346,6 +349,7 @@ let snakeFriend: Sprite = null
 let duckFriend: Sprite = null
 let ghostFriend: Sprite = null
 let heroBat: Sprite = null
+initializeBackground()
 class ActionKind {
     static Walking = 0
     static Idle = 1
