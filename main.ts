@@ -2,9 +2,6 @@ namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
 }
-/**
- * ?
- */
 // picking up items
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
     if (currentItem == true) {
@@ -325,6 +322,9 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
         heroBat.setFlag(SpriteFlag.Ghost, false)
     }
 }
+/**
+ * ?
+ */
 let facingRight = false
 let facingLeft = false
 let MainFlyRight: animation.Animation = null
