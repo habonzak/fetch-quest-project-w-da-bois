@@ -3,7 +3,10 @@
     "description": "",
     "dependencies": {
         "device": "*",
-        "animation": "*"
+        "animation": "*",
+        "tilemaps": "github:microsoft/pxt-tilemaps#v1.12.0",
+        "color-coded-tilemap": "*",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.1"
     },
     "files": [
         "main.blocks",
