@@ -466,6 +466,17 @@ rejectText = [
 "Gross :(",
 "I don't like this."
 ]
+let introText = [
+"Welcome to our game!",
+"Press A to talk to a villager.",
+"Complete each quest by bringing lunch to each villager.",
+"To pick up a food item, fly over it.",
+"To win, you must finish all three quests.",
+"Press B to check your progress and current item."
+]
+for (let value of introText) {
+    game.showLongText(value, DialogLayout.Center)
+}
 // calls functions
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
