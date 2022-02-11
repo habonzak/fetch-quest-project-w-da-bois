@@ -349,6 +349,18 @@ let snakeFriend: Sprite = null
 let duckFriend: Sprite = null
 let ghostFriend: Sprite = null
 let heroBat: Sprite = null
+let introText = [
+"Welcome to our game!",
+"Press A to talk to a villager.",
+"Complete each quest by bringing lunch to each villager.",
+"To pick up a food item, fly over it.",
+"To win, you must finish all three quests.",
+"Press B to check your progress and current item.",
+"Good luck! Press A to begin the game."
+]
+for (let value of introText) {
+    game.showLongText(value, DialogLayout.Center)
+}
 initializeBackground()
 class ActionKind {
     static Walking = 0
@@ -466,17 +478,6 @@ rejectText = [
 "Gross :(",
 "I don't like this."
 ]
-let introText = [
-"Welcome to our game!",
-"Press A to talk to a villager.",
-"Complete each quest by bringing lunch to each villager.",
-"To pick up a food item, fly over it.",
-"To win, you must finish all three quests.",
-"Press B to check your progress and current item."
-]
-for (let value of introText) {
-    game.showLongText(value, DialogLayout.Center)
-}
 // calls functions
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
