@@ -52,7 +52,7 @@ function createPizza () {
         4 d d d 4 4 4 . . . . . . . . . 
         4 4 4 4 . . . . . . . . . . . . 
         `, SpriteKind.Item)
-    pizza.setPosition(122, 101)
+    tiles.placeOnTile(pizza, tiles.getTileLocation(17, 10))
     hasPizza = false
 }
 function createBurger () {
@@ -74,7 +74,7 @@ function createBurger () {
         . e e b b 4 4 4 4 4 4 4 4 e e . 
         . . . c c c c c e e e e e . . . 
         `, SpriteKind.Item)
-    burger.setPosition(43, 36)
+    tiles.placeOnTile(burger, tiles.getTileLocation(5, 29))
     hasBurger = false
 }
 function batHeroFly () {
@@ -246,11 +246,12 @@ function createCake () {
         . . . . . . b b b b 3 d d d b a 
         . . . . . . . . . . b b b a a . 
         `, SpriteKind.Item)
-    cake.setPosition(31, 88)
+    tiles.placeOnTile(cake, tiles.getTileLocation(27, 17))
     hasCake = false
 }
 function initializeBackground () {
     tiles.setCurrentTilemap(tilemap`level1`)
+    scene.cameraFollowSprite(heroBat)
 }
 // talk to friend sprite
 function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
@@ -361,7 +362,6 @@ let introText = [
 for (let value of introText) {
     game.showLongText(value, DialogLayout.Center)
 }
-initializeBackground()
 class ActionKind {
     static Walking = 0
     static Idle = 1
@@ -452,6 +452,7 @@ snakeFriend = sprites.create(img`
     . . c c c c c c c c c f . . . . 
     `, SpriteKind.Friend)
 snakeFriend.setPosition(114, 55)
+initializeBackground()
 createBurger()
 createPizza()
 createCake()
