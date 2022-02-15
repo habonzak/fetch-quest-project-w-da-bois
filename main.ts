@@ -21,7 +21,29 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSpr
         hasCake = true
     }
 })
-function initSprites () {
+function placeTileSprites () {
+    tiles.placeOnRandomTile(topRoofMiddle, assets.tile`myTile0`)
+    tiles.placeOnRandomTile(topRoofLeft, assets.tile`myTile2`)
+    tiles.placeOnRandomTile(topRoofRight, assets.tile`myTile1`)
+    tiles.placeOnRandomTile(middleRoofLeft, assets.tile`houseDoor9`)
+    tiles.placeOnRandomTile(middleRoofRight, assets.tile`houseDoor6`)
+    tiles.placeOnRandomTile(middleRoof, assets.tile`houseDoor`)
+    tiles.placeOnRandomTile(roofRight, assets.tile`myTile`)
+    tiles.placeOnRandomTile(roofLeft, assets.tile`myTile3`)
+}
+// checks completed quests
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (hasBurger == true && ghostDone == false) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding a burger.")
+    } else if (hasPizza == true && duckDone == false) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding pizza.")
+    } else if (hasCake == true && snakeDone == false) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding cake.")
+    } else {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding nothing.")
+    }
+})
+function setSprites () {
     // initialize sprites
     heroBat = sprites.create(img`
         . . f f f . . . . . . . . f f f 
@@ -108,74 +130,7 @@ function initSprites () {
         `, SpriteKind.Friend)
     snakeFriend.setPosition(114, 55)
 }
-function placeTileSprites () {
-    tiles.placeOnRandomTile(topRoofMiddle, assets.tile`myTile0`)
-    tiles.placeOnRandomTile(topRoofLeft, assets.tile`myTile2`)
-    tiles.placeOnRandomTile(topRoofRight, assets.tile`myTile1`)
-    tiles.placeOnRandomTile(middleRoofLeft, assets.tile`houseDoor9`)
-    tiles.placeOnRandomTile(middleRoofRight, assets.tile`houseDoor6`)
-    tiles.placeOnRandomTile(middleRoof, assets.tile`houseDoor`)
-    tiles.placeOnRandomTile(roofRight, assets.tile`myTile`)
-    tiles.placeOnRandomTile(roofLeft, assets.tile`myTile3`)
-}
-// checks completed quests
-controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (hasBurger == true && ghostDone == false) {
-        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding a burger.")
-    } else if (hasPizza == true && duckDone == false) {
-        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding pizza.")
-    } else if (hasCake == true && snakeDone == false) {
-        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding cake.")
-    } else {
-        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding nothing.")
-    }
-})
-// creates or resets items
-function createPizza () {
-    pizza = sprites.create(img`
-        . . . . . . b b b b . . . . . . 
-        . . . . . . b 4 4 4 b . . . . . 
-        . . . . . . b b 4 4 4 b . . . . 
-        . . . . . b 4 b b b 4 4 b . . . 
-        . . . . b d 5 5 5 4 b 4 4 b . . 
-        . . . . b 3 2 3 5 5 4 e 4 4 b . 
-        . . . b d 2 2 2 5 7 5 4 e 4 4 e 
-        . . . b 5 3 2 3 5 5 5 5 e e e e 
-        . . b d 7 5 5 5 3 2 3 5 5 e e e 
-        . . b 5 5 5 5 5 2 2 2 5 5 d e e 
-        . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
-        . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
-        b d 3 2 d 5 5 5 d d d 4 4 . . . 
-        b 5 5 5 5 d d 4 4 4 4 . . . . . 
-        4 d d d 4 4 4 . . . . . . . . . 
-        4 4 4 4 . . . . . . . . . . . . 
-        `, SpriteKind.Item)
-    tiles.placeOnTile(pizza, tiles.getTileLocation(17, 10))
-    hasPizza = false
-}
-function createBurger () {
-    burger = sprites.create(img`
-        . . . . c c c b b b b b . . . . 
-        . . c c b 4 4 4 4 4 4 b b b . . 
-        . c c 4 4 4 4 4 5 4 4 4 4 b c . 
-        . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
-        e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
-        e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
-        e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
-        . e b 4 4 4 4 4 5 4 4 4 4 b e . 
-        8 7 e e b 4 4 4 4 4 4 b e e 6 8 
-        8 7 2 e e e e e e e e e e 2 7 8 
-        e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
-        e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
-        e b e 8 8 c c 8 8 c c c 8 e b e 
-        e e b e c c e e e e e c e b e e 
-        . e e b b 4 4 4 4 4 4 4 4 e e . 
-        . . . c c c c c e e e e e . . . 
-        `, SpriteKind.Item)
-    tiles.placeOnTile(burger, tiles.getTileLocation(5, 29))
-    hasBurger = false
-}
-function initPresets () {
+function setPresets () {
     // set variables
     questsDone = 0
     currentItem = false
@@ -186,7 +141,7 @@ function initPresets () {
     talkDuck = false
     talkSnake = false
 }
-function initializeTileSprites () {
+function createTileSprites () {
     topRoofMiddle = sprites.create(img`
         . . . . . . c c c c . . . . . . 
         . . . . . c e 4 5 e c . . . . . 
@@ -332,7 +287,36 @@ function initializeTileSprites () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.tileThing)
 }
-function initArrays () {
+function setBackground () {
+    tiles.setCurrentTilemap(tilemap`level1`)
+    scene.cameraFollowSprite(heroBat)
+    createTileSprites()
+    placeTileSprites()
+}
+// creates or resets items
+function createPizza () {
+    pizza = sprites.create(img`
+        . . . . . . b b b b . . . . . . 
+        . . . . . . b 4 4 4 b . . . . . 
+        . . . . . . b b 4 4 4 b . . . . 
+        . . . . . b 4 b b b 4 4 b . . . 
+        . . . . b d 5 5 5 4 b 4 4 b . . 
+        . . . . b 3 2 3 5 5 4 e 4 4 b . 
+        . . . b d 2 2 2 5 7 5 4 e 4 4 e 
+        . . . b 5 3 2 3 5 5 5 5 e e e e 
+        . . b d 7 5 5 5 3 2 3 5 5 e e e 
+        . . b 5 5 5 5 5 2 2 2 5 5 d e e 
+        . b 3 2 3 5 7 5 3 2 3 5 d d e 4 
+        . b 2 2 2 5 5 5 5 5 5 d d e 4 . 
+        b d 3 2 d 5 5 5 d d d 4 4 . . . 
+        b 5 5 5 5 d d 4 4 4 4 . . . . . 
+        4 d d d 4 4 4 . . . . . . . . . 
+        4 4 4 4 . . . . . . . . . . . . 
+        `, SpriteKind.Item)
+    tiles.placeOnTile(pizza, tiles.getTileLocation(17, 10))
+    hasPizza = false
+}
+function setArrays () {
     introText = [
     "Welcome to our game!",
     "Press A to talk to a villager.",
@@ -357,6 +341,28 @@ function initArrays () {
     "I don't like this."
     ]
 }
+function createBurger () {
+    burger = sprites.create(img`
+        . . . . c c c b b b b b . . . . 
+        . . c c b 4 4 4 4 4 4 b b b . . 
+        . c c 4 4 4 4 4 5 4 4 4 4 b c . 
+        . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
+        e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
+        e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
+        e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
+        . e b 4 4 4 4 4 5 4 4 4 4 b e . 
+        8 7 e e b 4 4 4 4 4 4 b e e 6 8 
+        8 7 2 e e e e e e e e e e 2 7 8 
+        e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
+        e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
+        e b e 8 8 c c 8 8 c c c 8 e b e 
+        e e b e c c e e e e e c e b e e 
+        . e e b b 4 4 4 4 4 4 4 4 e e . 
+        . . . c c c c c e e e e e . . . 
+        `, SpriteKind.Item)
+    tiles.placeOnTile(burger, tiles.getTileLocation(5, 29))
+    hasBurger = false
+}
 function createCake () {
     cake = sprites.create(img`
         . . . . . . . . . . b b b . . . 
@@ -379,21 +385,15 @@ function createCake () {
     tiles.placeOnTile(cake, tiles.getTileLocation(27, 17))
     hasCake = false
 }
-function initializeBackground () {
-    tiles.setCurrentTilemap(tilemap`level1`)
-    scene.cameraFollowSprite(heroBat)
-    initializeTileSprites()
-    placeTileSprites()
-}
 // talk to friend sprite
-function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
+function talkFriend (who: Sprite, food: boolean, done: boolean, meet: boolean) {
     if (heroBat.overlapsWith(who) && controller.A.isPressed()) {
         heroBat.setFlag(SpriteFlag.Ghost, true)
         // has item, has not talked to sprite yet
         // giving item to sprite
         // has no items
         // has wrong item
-        if (chat == false && thing == true) {
+        if (meet == false && food == true) {
             if (who == ghostFriend) {
                 who.sayText("Please bring me a burger.", 500, false)
                 talkGhost = true
@@ -405,10 +405,10 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
                 talkSnake = true
             }
             pause(200)
-        } else if (thing == true) {
+        } else if (food == true) {
             // quest not done
             // quest already done
-            if (quest == false) {
+            if (done == false) {
                 questsDone += 1
                 who.sayText("Thank you!", 500, false)
                 who.startEffect(effects.hearts, 500)
@@ -430,7 +430,7 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
                     who.startEffect(effects.hearts, 500)
                 }
             }
-        } else if (currentItem == false && thing == false) {
+        } else if (currentItem == false && food == false) {
             if (who == ghostFriend) {
                 who.sayText("Please bring me a burger.", 500, false)
                 talkGhost = true
@@ -463,6 +463,10 @@ let friendText: string[] = []
 let talkSnake = false
 let talkDuck = false
 let talkGhost = false
+let snakeFriend: Sprite = null
+let duckFriend: Sprite = null
+let ghostFriend: Sprite = null
+let heroBat: Sprite = null
 let questsDone = 0
 let snakeDone = false
 let duckDone = false
@@ -475,10 +479,6 @@ let middleRoofLeft: Sprite = null
 let topRoofRight: Sprite = null
 let topRoofLeft: Sprite = null
 let topRoofMiddle: Sprite = null
-let snakeFriend: Sprite = null
-let duckFriend: Sprite = null
-let ghostFriend: Sprite = null
-let heroBat: Sprite = null
 let hasCake = false
 let hasPizza = false
 let hasBurger = false
@@ -487,16 +487,16 @@ let pizza: Sprite = null
 let burger: Sprite = null
 let currentItem = false
 let introText: string[] = []
-initArrays()
+setArrays()
 for (let value of introText) {
     game.showLongText(value, DialogLayout.Center)
 }
-initSprites()
-initializeBackground()
+setSprites()
+setBackground()
+setPresets()
 createBurger()
 createPizza()
 createCake()
-initPresets()
 // calls functions
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
