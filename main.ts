@@ -103,6 +103,96 @@ function createCake () {
 function initializeBackground () {
     tiles.setCurrentTilemap(tilemap`level1`)
     scene.cameraFollowSprite(heroBat)
+    topRoof = sprites.create(img`
+        . . . . . . c c c c . . . . . . 
+        . . . . . c e 4 5 e c . . . . . 
+        . . . . c 2 e 4 5 e 2 c . . . . 
+        . . . c 4 2 e 4 4 e 2 2 c . . . 
+        . . c e 2 2 e 4 5 e 2 4 e c . . 
+        . c 2 e 4 2 e 4 4 e 2 2 e 2 c . 
+        c 4 2 e 2 2 e 4 5 e 2 4 e 2 2 c 
+        e 2 2 e 4 2 e 4 4 e 2 2 e 2 4 e 
+        e 4 2 e 2 2 e c c e 2 4 e 2 2 e 
+        e 2 2 e 4 2 c e 4 c 2 2 e 2 4 e 
+        e 4 2 e 2 c 4 e e e c 4 e 2 2 e 
+        e 2 2 e c e e c c e 4 c e 2 4 e 
+        e 4 2 c 4 e c e c c e 4 c 2 2 e 
+        e 2 c 4 e c e c e c c e e c 4 e 
+        e c 4 e c c e e e e e c e 4 c e 
+        c e e c c c c c c c c c c e 4 c 
+        `, SpriteKind.tileThing)
+    topRoofRight = sprites.create(img`
+        c 2 e 2 2 e 2 4 e c . . . . . . 
+        4 c e 2 4 e 2 2 e 2 c . . . . . 
+        e 4 c c 2 e 2 4 e 2 4 c . . . . 
+        c e 4 4 c e 2 2 e 2 2 e c . . . 
+        c c e e 4 c 2 4 e 2 4 e 2 c . . 
+        4 c c c e 4 c 2 e 2 2 e 2 2 c . 
+        e e c e c e 4 c c 2 4 e 2 4 e c 
+        e e e c e c e 4 4 c 2 e 2 2 e 2 
+        e e e e c c c e e 4 c e 2 4 e 2 
+        e e e e e e c c c e 4 c 2 2 e 2 
+        c c c c c c c c c c e 4 c c e 2 
+        4 4 4 4 4 4 4 4 c 4 c e 4 4 c 2 
+        e e e e e e e e e e c c e e 4 c 
+        e e e e e e e e e e e c c c e 4 
+        e e e e e e e e e e e e c e c e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.tileThing)
+    topRoofLeft = sprites.create(img`
+        . . . . . . c e 4 2 e 2 2 e 2 c 
+        . . . . . c 2 e 2 2 e 4 2 e c 4 
+        . . . . c 4 2 e 4 2 e 2 c c 4 e 
+        . . . c e 2 2 e 2 2 e c 4 4 e c 
+        . . c 2 e 4 2 e 4 2 c 4 e e c c 
+        . c 2 2 e 2 2 e 2 c 4 e c c c 4 
+        c e 4 2 e 4 2 c c 4 e c e c e e 
+        2 e 2 2 e 2 c 4 4 e c e c e e e 
+        2 e 4 2 e c 4 e e c c c e e e e 
+        2 e 2 2 c 4 e c c c e e e e e e 
+        2 e c c 4 e c c c c c c c c c c 
+        2 c 4 4 e c 4 c 4 4 4 4 4 4 4 4 
+        c 4 e e c c e e e e e e e e e e 
+        4 e c c c e e e e e e e e e e e 
+        e c e c e e e e e e e e e e e e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.tileThing)
+    topRoofRightMiddle = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        2 4 c . . . . . . . . . . . . . 
+        2 2 e c . . . . . . . . . . . . 
+        2 4 e 2 c . . . . . . . . . . . 
+        2 2 e 2 2 c . . . . . . . . . . 
+        2 4 e 2 4 e c . . . . . . . . . 
+        2 2 e 2 2 e 2 c . . . . . . . . 
+        2 4 e 2 4 e 2 2 c . . . . . . . 
+        `, SpriteKind.tileThing)
+    topRoofLeftMiddle = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . c 4 2 
+        . . . . . . . . . . . . c e 2 2 
+        . . . . . . . . . . . c 2 e 4 2 
+        . . . . . . . . . . c 2 2 e 2 2 
+        . . . . . . . . . c e 4 2 e 4 2 
+        . . . . . . . . c 2 e 2 2 e 2 2 
+        . . . . . . . c 2 2 e 4 2 e 4 2 
+        `, SpriteKind.tileThing)
     roofRight = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -139,8 +229,32 @@ function initializeBackground () {
         . . . . . . . . . . . . . . . c 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
+    middleHouse = sprites.create(img`
+        e c c 4 4 4 4 4 4 4 4 4 4 c 4 c 
+        e c e e e e e e e e e e e c c e 
+        c c e e e e b b b b e e e e e c 
+        e e e e b b 9 9 9 6 b b e e e e 
+        c c c b 9 1 9 9 9 9 9 6 b c c c 
+        4 4 4 b 9 9 1 9 9 9 9 9 c 4 4 4 
+        e e b 9 9 9 1 1 9 9 9 9 6 c e e 
+        e e b 9 9 9 9 9 1 9 9 9 6 c e e 
+        e e c 9 9 1 1 9 9 1 1 9 9 c e e 
+        e e c 6 9 9 1 1 9 9 1 9 9 c e e 
+        c c c c 6 9 9 9 1 9 9 9 c c c c 
+        4 4 4 c 6 6 9 9 9 9 9 9 c 4 4 4 
+        e e e e c c 6 9 9 9 c c e e e e 
+        e e e e e e c c c c e e e e e e 
+        e e e e e e e e e e e e e e e e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    tiles.placeOnRandomTile(topRoof, assets.tile`myTile0`)
+    tiles.placeOnRandomTile(topRoofRight, assets.tile`houseDoor6`)
+    tiles.placeOnRandomTile(topRoofLeft, assets.tile`houseDoor9`)
+    tiles.placeOnRandomTile(topRoofRightMiddle, assets.tile`myTile1`)
+    tiles.placeOnRandomTile(topRoofLeftMiddle, assets.tile`myTile2`)
     tiles.placeOnRandomTile(roofRight, assets.tile`myTile`)
     tiles.placeOnRandomTile(roofLeft, assets.tile`myTile3`)
+    tiles.placeOnRandomTile(middleHouse, assets.tile`houseDoor`)
 }
 // talk to friend sprite
 function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
@@ -217,8 +331,14 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
 }
 let facingRight = false
 let facingLeft = false
+let middleHouse: Sprite = null
 let roofLeft: Sprite = null
 let roofRight: Sprite = null
+let topRoofLeftMiddle: Sprite = null
+let topRoofRightMiddle: Sprite = null
+let topRoofLeft: Sprite = null
+let topRoofRight: Sprite = null
+let topRoof: Sprite = null
 let hasCake = false
 let hasPizza = false
 let hasBurger = false
