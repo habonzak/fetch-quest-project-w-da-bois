@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const Friend = SpriteKind.create()
     export const Item = SpriteKind.create()
+    export const tileThing = SpriteKind.create()
 }
 // picking up items
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
@@ -252,6 +253,44 @@ function createCake () {
 function initializeBackground () {
     tiles.setCurrentTilemap(tilemap`level1`)
     scene.cameraFollowSprite(heroBat)
+    roofRight = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.tileThing)
+    roofLeft = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    tiles.placeOnRandomTile(roofRight, assets.tile`myTile`)
+    tiles.placeOnRandomTile(roofLeft, assets.tile`myTile3`)
 }
 // talk to friend sprite
 function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean) {
@@ -328,6 +367,8 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
 }
 let facingRight = false
 let facingLeft = false
+let roofLeft: Sprite = null
+let roofRight: Sprite = null
 let MainFlyRight: animation.Animation = null
 let mainFlyLeft: animation.Animation = null
 let hasCake = false
