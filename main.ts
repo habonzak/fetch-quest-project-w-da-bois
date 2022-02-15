@@ -21,6 +21,93 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSpr
         hasCake = true
     }
 })
+function initSprites () {
+    // initialize sprites
+    heroBat = sprites.create(img`
+        . . f f f . . . . . . . . f f f 
+        . f f c c . . . . . . f c b b c 
+        f f c c . . . . . . f c b b c . 
+        f c f c . . . . . . f b c c c . 
+        f f f c c . c c . f c b b c c . 
+        f f c 3 c c 3 c c f b c b b c . 
+        f f b 3 b c 3 b c f b c c b c . 
+        . c b b b b b b c b b c c c . . 
+        . c 1 b b b 1 b b c c c c . . . 
+        c b b b b b b b b b c c . . . . 
+        c b c b b b c b b b b f . . . . 
+        f b 1 f f f 1 b b b b f c . . . 
+        f b b b b b b b b b b f c c . . 
+        . f b b b b b b b b c f . . . . 
+        . . f b b b b b b c f . . . . . 
+        . . . f f f f f f f . . . . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(heroBat)
+    ghostFriend = sprites.create(img`
+        ........................
+        ........................
+        ........................
+        ........................
+        ..........ffff..........
+        ........ff1111ff........
+        .......fb111111bf.......
+        .......f11111111f.......
+        ......fd11111111df......
+        ......fd11111111df......
+        ......fddd1111dddf......
+        ......fbdbfddfbdbf......
+        ......fcdcf11fcdcf......
+        .......fb111111bf.......
+        ......fffcdb1bdffff.....
+        ....fc111cbfbfc111cf....
+        ....f1b1b1ffff1b1b1f....
+        ....fbfbffffffbfbfbf....
+        .........ffffff.........
+        ...........fff..........
+        ........................
+        ........................
+        ........................
+        ........................
+        `, SpriteKind.Friend)
+    ghostFriend.setPosition(60, 70)
+    duckFriend = sprites.create(img`
+        . . . . . . . . . . b 5 b . . . 
+        . . . . . . . . . b 5 b . . . . 
+        . . . . . . . . . b c . . . . . 
+        . . . . . . b b b b b b . . . . 
+        . . . . . b b 5 5 5 5 5 b . . . 
+        . . . . b b 5 d 1 f 5 5 d f . . 
+        . . . . b 5 5 1 f f 5 d 4 c . . 
+        . . . . b 5 5 d f b d d 4 4 . . 
+        b d d d b b d 5 5 5 4 4 4 4 4 b 
+        b b d 5 5 5 b 5 5 4 4 4 4 4 b . 
+        b d c 5 5 5 5 d 5 5 5 5 5 b . . 
+        c d d c d 5 5 b 5 5 5 5 5 5 b . 
+        c b d d c c b 5 5 5 5 5 5 5 b . 
+        . c d d d d d d 5 5 5 5 5 d b . 
+        . . c b d d d d d 5 5 5 b b . . 
+        . . . c c c c c c c c b b . . . 
+        `, SpriteKind.Friend)
+    duckFriend.setPosition(118, 29)
+    snakeFriend = sprites.create(img`
+        . . . . c c c c c c . . . . . . 
+        . . . c 6 7 7 7 7 6 c . . . . . 
+        . . c 7 7 7 7 7 7 7 7 c . . . . 
+        . c 6 7 7 7 7 7 7 7 7 6 c . . . 
+        . c 7 c 6 6 6 6 c 7 7 7 c . . . 
+        . f 7 6 f 6 6 f 6 7 7 7 f . . . 
+        . f 7 7 7 7 7 7 7 7 7 7 f . . . 
+        . . f 7 7 7 7 6 c 7 7 6 f c . . 
+        . . . f c c c c 7 7 6 f 7 7 c . 
+        . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
+        . c 7 7 2 7 7 c f c 6 7 7 6 c c 
+        c 1 1 1 1 7 6 f c c 6 6 6 c . . 
+        f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
+        f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
+        . f 6 1 1 1 1 1 1 6 6 6 f . . . 
+        . . c c c c c c c c c f . . . . 
+        `, SpriteKind.Friend)
+    snakeFriend.setPosition(114, 55)
+}
 // checks completed quests
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (hasBurger == true && ghostDone == false) {
@@ -77,6 +164,42 @@ function createBurger () {
         `, SpriteKind.Item)
     tiles.placeOnTile(burger, tiles.getTileLocation(5, 29))
     hasBurger = false
+}
+function initPresets () {
+    // set variables
+    questsDone = 0
+    currentItem = false
+    ghostDone = false
+    duckDone = false
+    snakeDone = false
+    talkGhost = false
+    talkDuck = false
+    talkSnake = false
+}
+function initArrays () {
+    introText = [
+    "Welcome to our game!",
+    "Press A to talk to a villager.",
+    "Complete each quest by bringing lunch to each villager.",
+    "To pick up a food item, fly over it.",
+    "To win, you must finish all three quests.",
+    "Press B to check your progress and current item.",
+    "Good luck! Press A to begin the game."
+    ]
+    friendText = [
+    "Hi friend!",
+    "Hey! :)",
+    ":)",
+    ":D",
+    "<3"
+    ]
+    rejectText = [
+    "Ew.",
+    "Yuck!",
+    "What is this? :(",
+    "Gross :(",
+    "I don't like this."
+    ]
 }
 function createCake () {
     cake = sprites.create(img`
@@ -217,150 +340,37 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
 }
 let roofLeft: Sprite = null
 let roofRight: Sprite = null
+let rejectText: string[] = []
+let friendText: string[] = []
+let talkSnake = false
+let talkDuck = false
+let talkGhost = false
+let questsDone = 0
+let snakeDone = false
+let duckDone = false
+let ghostDone = false
+let snakeFriend: Sprite = null
+let duckFriend: Sprite = null
+let ghostFriend: Sprite = null
+let heroBat: Sprite = null
 let hasCake = false
 let hasPizza = false
 let hasBurger = false
 let cake: Sprite = null
 let pizza: Sprite = null
 let burger: Sprite = null
-let rejectText: string[] = []
-let friendText: string[] = []
-let talkSnake = false
-let talkDuck = false
-let talkGhost = false
-let snakeDone = false
-let duckDone = false
-let ghostDone = false
 let currentItem = false
-let questsDone = 0
-let snakeFriend: Sprite = null
-let duckFriend: Sprite = null
-let ghostFriend: Sprite = null
-let heroBat: Sprite = null
-let introText = [
-"Welcome to our game!",
-"Press A to talk to a villager.",
-"Complete each quest by bringing lunch to each villager.",
-"To pick up a food item, fly over it.",
-"To win, you must finish all three quests.",
-"Press B to check your progress and current item.",
-"Good luck! Press A to begin the game."
-]
+let introText: string[] = []
+initArrays()
 for (let value of introText) {
     game.showLongText(value, DialogLayout.Center)
 }
-// initialize sprites
-heroBat = sprites.create(img`
-    . . f f f . . . . . . . . f f f 
-    . f f c c . . . . . . f c b b c 
-    f f c c . . . . . . f c b b c . 
-    f c f c . . . . . . f b c c c . 
-    f f f c c . c c . f c b b c c . 
-    f f c 3 c c 3 c c f b c b b c . 
-    f f b 3 b c 3 b c f b c c b c . 
-    . c b b b b b b c b b c c c . . 
-    . c 1 b b b 1 b b c c c c . . . 
-    c b b b b b b b b b c c . . . . 
-    c b c b b b c b b b b f . . . . 
-    f b 1 f f f 1 b b b b f c . . . 
-    f b b b b b b b b b b f c c . . 
-    . f b b b b b b b b c f . . . . 
-    . . f b b b b b b c f . . . . . 
-    . . . f f f f f f f . . . . . . 
-    `, SpriteKind.Player)
-controller.moveSprite(heroBat)
-ghostFriend = sprites.create(img`
-    ........................
-    ........................
-    ........................
-    ........................
-    ..........ffff..........
-    ........ff1111ff........
-    .......fb111111bf.......
-    .......f11111111f.......
-    ......fd11111111df......
-    ......fd11111111df......
-    ......fddd1111dddf......
-    ......fbdbfddfbdbf......
-    ......fcdcf11fcdcf......
-    .......fb111111bf.......
-    ......fffcdb1bdffff.....
-    ....fc111cbfbfc111cf....
-    ....f1b1b1ffff1b1b1f....
-    ....fbfbffffffbfbfbf....
-    .........ffffff.........
-    ...........fff..........
-    ........................
-    ........................
-    ........................
-    ........................
-    `, SpriteKind.Friend)
-ghostFriend.setPosition(60, 70)
-duckFriend = sprites.create(img`
-    . . . . . . . . . . b 5 b . . . 
-    . . . . . . . . . b 5 b . . . . 
-    . . . . . . . . . b c . . . . . 
-    . . . . . . b b b b b b . . . . 
-    . . . . . b b 5 5 5 5 5 b . . . 
-    . . . . b b 5 d 1 f 5 5 d f . . 
-    . . . . b 5 5 1 f f 5 d 4 c . . 
-    . . . . b 5 5 d f b d d 4 4 . . 
-    b d d d b b d 5 5 5 4 4 4 4 4 b 
-    b b d 5 5 5 b 5 5 4 4 4 4 4 b . 
-    b d c 5 5 5 5 d 5 5 5 5 5 b . . 
-    c d d c d 5 5 b 5 5 5 5 5 5 b . 
-    c b d d c c b 5 5 5 5 5 5 5 b . 
-    . c d d d d d d 5 5 5 5 5 d b . 
-    . . c b d d d d d 5 5 5 b b . . 
-    . . . c c c c c c c c b b . . . 
-    `, SpriteKind.Friend)
-duckFriend.setPosition(118, 29)
-snakeFriend = sprites.create(img`
-    . . . . c c c c c c . . . . . . 
-    . . . c 6 7 7 7 7 6 c . . . . . 
-    . . c 7 7 7 7 7 7 7 7 c . . . . 
-    . c 6 7 7 7 7 7 7 7 7 6 c . . . 
-    . c 7 c 6 6 6 6 c 7 7 7 c . . . 
-    . f 7 6 f 6 6 f 6 7 7 7 f . . . 
-    . f 7 7 7 7 7 7 7 7 7 7 f . . . 
-    . . f 7 7 7 7 6 c 7 7 6 f c . . 
-    . . . f c c c c 7 7 6 f 7 7 c . 
-    . . c 7 2 7 7 7 6 c f 7 7 7 7 c 
-    . c 7 7 2 7 7 c f c 6 7 7 6 c c 
-    c 1 1 1 1 7 6 f c c 6 6 6 c . . 
-    f 1 1 1 1 1 6 6 c 6 6 6 6 f . . 
-    f 6 1 1 1 1 1 6 6 6 6 6 c f . . 
-    . f 6 1 1 1 1 1 1 6 6 6 f . . . 
-    . . c c c c c c c c c f . . . . 
-    `, SpriteKind.Friend)
-snakeFriend.setPosition(114, 55)
+initSprites()
 initializeBackground()
 createBurger()
 createPizza()
 createCake()
-// set variables
-questsDone = 0
-currentItem = false
-ghostDone = false
-duckDone = false
-snakeDone = false
-talkGhost = false
-talkDuck = false
-talkSnake = false
-friendText = [
-"Hi friend!",
-"Hey! :)",
-":)",
-":D",
-"<3"
-]
-rejectText = [
-"Ew.",
-"Yuck!",
-"What is this? :(",
-"Gross :(",
-"I don't like this."
-]
+initPresets()
 // calls functions
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
