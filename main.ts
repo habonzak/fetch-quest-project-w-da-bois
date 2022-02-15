@@ -215,8 +215,6 @@ function talkFriend (who: Sprite, thing: boolean, quest: boolean, chat: boolean)
         heroBat.setFlag(SpriteFlag.Ghost, false)
     }
 }
-let facingRight = false
-let facingLeft = false
 let roofLeft: Sprite = null
 let roofRight: Sprite = null
 let hasCake = false
@@ -371,8 +369,42 @@ game.onUpdate(function () {
 })
 game.onUpdate(function () {
     if (heroBat.vx < 0) {
-        facingLeft = true
+        heroBat.setImage(img`
+            . . f f f . . . . . . . . f f f 
+            . f f c c . . . . . . f c b b c 
+            f f c c . . . . . . f c b b c . 
+            f c f c . . . . . . f b c c c . 
+            f f f c c . c c . f c b b c c . 
+            f f c 3 c c 3 c c f b c b b c . 
+            f f b 3 b c 3 b c f b c c b c . 
+            . c b b b b b b c b b c c c . . 
+            . c 1 b b b 1 b b c c c c . . . 
+            c b b b b b b b b b c c . . . . 
+            c b c b b b c b b b b f . . . . 
+            f b 1 f f f 1 b b b b f c . . . 
+            f b b b b b b b b b b f c c . . 
+            . f b b b b b b b b c f . . . . 
+            . . f b b b b b b c f . . . . . 
+            . . . f f f f f f f . . . . . . 
+            `)
     } else if (heroBat.vx > 0) {
-        facingRight = true
+        heroBat.setImage(img`
+            f f f . . . . . . . . f f f . . 
+            c b b c f . . . . . . c c f f . 
+            . c b b c f . . . . . . c c f f 
+            . c c c b f . . . . . . c f c f 
+            . c c b b c f . c c . c c f f f 
+            . c b b c b f c c 3 c c 3 c f f 
+            . c b c c b f c b 3 c b 3 b f f 
+            . . c c c b b c b b b b b b c . 
+            . . . c c c c b b 1 b b b 1 c . 
+            . . . . c c b b b b b b b b b c 
+            . . . . f b b b b c b b b c b c 
+            . . . c f b b b b 1 f f f 1 b f 
+            . . c c f b b b b b b b b b b f 
+            . . . . f c b b b b b b b b f . 
+            . . . . . f c b b b b b b f . . 
+            . . . . . . f f f f f f f . . . 
+            `)
     }
 })
