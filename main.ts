@@ -325,6 +325,7 @@ function setArrays () {
     "To pick up a food item, fly over it.",
     "To win, you must finish all three quests.",
     "Press B to check your progress and current item.",
+    "Once you're finished, go to the top right corner and press A.",
     "Good luck! Press A to begin the game."
     ]
     friendText = [
