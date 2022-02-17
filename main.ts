@@ -30,7 +30,6 @@ function placeTileSprites () {
     tiles.placeOnTile(middleRoof1, tiles.getTileLocation(18, 19))
     tiles.placeOnTile(roofRight1, tiles.getTileLocation(20, 19))
     tiles.placeOnTile(roofLeft1, tiles.getTileLocation(16, 19))
-    pause(100)
     tiles.placeOnTile(topRoofMiddle2, tiles.getTileLocation(6, 13))
     tiles.placeOnTile(topRoofLeft2, tiles.getTileLocation(5, 13))
     tiles.placeOnTile(topRoofRight2, tiles.getTileLocation(7, 13))
@@ -39,7 +38,6 @@ function placeTileSprites () {
     tiles.placeOnTile(middleRoof2, tiles.getTileLocation(6, 14))
     tiles.placeOnTile(roofRight2, tiles.getTileLocation(8, 14))
     tiles.placeOnTile(roofLeft2, tiles.getTileLocation(4, 14))
-    pause(100)
     tiles.placeOnTile(topRoofMiddle3, tiles.getTileLocation(2, 0))
     tiles.placeOnTile(topRoofLeft3, tiles.getTileLocation(1, 0))
     tiles.placeOnTile(topRoofRight3, tiles.getTileLocation(3, 0))
@@ -82,6 +80,7 @@ function setSprites () {
         . . . f f f f f f f . . . . . . 
         `, SpriteKind.Player)
     controller.moveSprite(heroBat)
+    scene.cameraFollowSprite(heroBat)
     ghostFriend = sprites.create(img`
         ........................
         ........................
@@ -108,7 +107,7 @@ function setSprites () {
         ........................
         ........................
         `, SpriteKind.Friend)
-    ghostFriend.setPosition(60, 70)
+    tiles.placeOnTile(ghostFriend, tiles.getTileLocation(18, 21))
     duckFriend = sprites.create(img`
         . . . . . . . . . . b 5 b . . . 
         . . . . . . . . . b 5 b . . . . 
@@ -127,7 +126,7 @@ function setSprites () {
         . . c b d d d d d 5 5 5 b b . . 
         . . . c c c c c c c c b b . . . 
         `, SpriteKind.Friend)
-    duckFriend.setPosition(118, 29)
+    tiles.placeOnTile(duckFriend, tiles.getTileLocation(6, 16))
     snakeFriend = sprites.create(img`
         . . . . c c c c c c . . . . . . 
         . . . c 6 7 7 7 7 6 c . . . . . 
@@ -146,7 +145,7 @@ function setSprites () {
         . f 6 1 1 1 1 1 1 6 6 6 f . . . 
         . . c c c c c c c c c f . . . . 
         `, SpriteKind.Friend)
-    snakeFriend.setPosition(114, 55)
+    tiles.placeOnTile(snakeFriend, tiles.getTileLocation(2, 3))
 }
 function setPresets () {
     // set variables
@@ -307,7 +306,6 @@ function createTileSprites () {
 }
 function setBackground () {
     tiles.setCurrentTilemap(tilemap`level1`)
-    scene.cameraFollowSprite(heroBat)
     createTileSprites()
     createTileSprites2()
     createTileSprites3()
@@ -333,7 +331,7 @@ function createPizza () {
         4 d d d 4 4 4 . . . . . . . . . 
         4 4 4 4 . . . . . . . . . . . . 
         `, SpriteKind.Item)
-    tiles.placeOnTile(pizza, tiles.getTileLocation(17, 10))
+    tiles.placeOnTile(pizza, tiles.getTileLocation(3, 22))
     hasPizza = false
 }
 function setArrays () {
@@ -526,7 +524,7 @@ function createBurger () {
         . e e b b 4 4 4 4 4 4 4 4 e e . 
         . . . c c c c c e e e e e . . . 
         `, SpriteKind.Item)
-    tiles.placeOnTile(burger, tiles.getTileLocation(5, 29))
+    tiles.placeOnTile(burger, tiles.getTileLocation(21, 9))
     hasBurger = false
 }
 function createCake () {
@@ -548,7 +546,7 @@ function createCake () {
         . . . . . . b b b b 3 d d d b a 
         . . . . . . . . . . b b b a a . 
         `, SpriteKind.Item)
-    tiles.placeOnTile(cake, tiles.getTileLocation(27, 17))
+    tiles.placeOnTile(cake, tiles.getTileLocation(12, 1))
     hasCake = false
 }
 function createTileSprites2 () {
@@ -819,8 +817,8 @@ setArrays()
 for (let value of introText) {
     game.showLongText(value, DialogLayout.Center)
 }
-setSprites()
 setBackground()
+setSprites()
 setPresets()
 createBurger()
 createPizza()
