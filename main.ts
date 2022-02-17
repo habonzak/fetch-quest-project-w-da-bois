@@ -22,14 +22,32 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSpr
     }
 })
 function placeTileSprites () {
-    tiles.placeOnRandomTile(topRoofMiddle, assets.tile`myTile0`)
-    tiles.placeOnRandomTile(topRoofLeft, assets.tile`myTile2`)
-    tiles.placeOnRandomTile(topRoofRight, assets.tile`myTile1`)
-    tiles.placeOnRandomTile(middleRoofLeft, assets.tile`houseDoor9`)
-    tiles.placeOnRandomTile(middleRoofRight, assets.tile`houseDoor6`)
-    tiles.placeOnRandomTile(middleRoof, assets.tile`houseDoor`)
-    tiles.placeOnRandomTile(roofRight, assets.tile`myTile`)
-    tiles.placeOnRandomTile(roofLeft, assets.tile`myTile3`)
+    tiles.placeOnTile(topRoofMiddle1, tiles.getTileLocation(18, 18))
+    tiles.placeOnTile(topRoofLeft1, tiles.getTileLocation(17, 18))
+    tiles.placeOnTile(topRoofRight1, tiles.getTileLocation(19, 18))
+    tiles.placeOnTile(middleRoofLeft1, tiles.getTileLocation(17, 19))
+    tiles.placeOnTile(middleRoofRight1, tiles.getTileLocation(19, 19))
+    tiles.placeOnTile(middleRoof1, tiles.getTileLocation(18, 19))
+    tiles.placeOnTile(roofRight1, tiles.getTileLocation(20, 19))
+    tiles.placeOnTile(roofLeft1, tiles.getTileLocation(16, 19))
+    pause(100)
+    tiles.placeOnTile(topRoofMiddle2, tiles.getTileLocation(6, 13))
+    tiles.placeOnTile(topRoofLeft2, tiles.getTileLocation(5, 13))
+    tiles.placeOnTile(topRoofRight2, tiles.getTileLocation(7, 13))
+    tiles.placeOnTile(middleRoofLeft2, tiles.getTileLocation(5, 14))
+    tiles.placeOnTile(middleRoofRight2, tiles.getTileLocation(7, 14))
+    tiles.placeOnTile(middleRoof2, tiles.getTileLocation(6, 14))
+    tiles.placeOnTile(roofRight2, tiles.getTileLocation(8, 14))
+    tiles.placeOnTile(roofLeft2, tiles.getTileLocation(4, 14))
+    pause(100)
+    tiles.placeOnTile(topRoofMiddle3, tiles.getTileLocation(2, 0))
+    tiles.placeOnTile(topRoofLeft3, tiles.getTileLocation(1, 0))
+    tiles.placeOnTile(topRoofRight3, tiles.getTileLocation(3, 0))
+    tiles.placeOnTile(middleRoofLeft3, tiles.getTileLocation(1, 1))
+    tiles.placeOnTile(middleRoofRight3, tiles.getTileLocation(3, 1))
+    tiles.placeOnTile(middleRoof3, tiles.getTileLocation(2, 1))
+    tiles.placeOnTile(roofRight3, tiles.getTileLocation(4, 1))
+    tiles.placeOnTile(roofLeft3, tiles.getTileLocation(0, 1))
 }
 // checks completed quests
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -142,7 +160,7 @@ function setPresets () {
     talkSnake = false
 }
 function createTileSprites () {
-    topRoofMiddle = sprites.create(img`
+    topRoofMiddle1 = sprites.create(img`
         . . . . . . c c c c . . . . . . 
         . . . . . c e 4 5 e c . . . . . 
         . . . . c 2 e 4 5 e 2 c . . . . 
@@ -160,7 +178,7 @@ function createTileSprites () {
         e c 4 e c c e e e e e c e 4 c e 
         c e e c c c c c c c c c c e 4 c 
         `, SpriteKind.Player)
-    topRoofLeft = sprites.create(img`
+    topRoofLeft1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -178,7 +196,7 @@ function createTileSprites () {
         . . . . . . . . c 2 e 2 2 e 2 2 
         . . . . . . . c 2 2 e 4 2 e 4 2 
         `, SpriteKind.Player)
-    topRoofRight = sprites.create(img`
+    topRoofRight1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -196,7 +214,7 @@ function createTileSprites () {
         2 2 e 2 2 e 2 c . . . . . . . . 
         2 4 e 2 4 e 2 2 c . . . . . . . 
         `, SpriteKind.Player)
-    middleRoofLeft = sprites.create(img`
+    middleRoofLeft1 = sprites.create(img`
         . . . . . . c e 4 2 e 2 2 e 2 c 
         . . . . . c 2 e 2 2 e 4 2 e c 4 
         . . . . c 4 2 e 4 2 e 2 c c 4 e 
@@ -214,7 +232,7 @@ function createTileSprites () {
         e c e c e e e e e e e e e e e e 
         c c c c c c c c c c c c c c c c 
         `, SpriteKind.Player)
-    middleRoofRight = sprites.create(img`
+    middleRoofRight1 = sprites.create(img`
         c 2 e 2 2 e 2 4 e c . . . . . . 
         4 c e 2 4 e 2 2 e 2 c . . . . . 
         e 4 c c 2 e 2 4 e 2 4 c . . . . 
@@ -232,7 +250,7 @@ function createTileSprites () {
         e e e e e e e e e e e e c e c e 
         c c c c c c c c c c c c c c c c 
         `, SpriteKind.Player)
-    middleRoof = sprites.create(img`
+    middleRoof1 = sprites.create(img`
         e c c 4 4 4 4 4 4 4 4 4 4 c 4 c 
         e c e e e e e e e e e e e c c e 
         c c e e e e b b b b e e e e e c 
@@ -250,7 +268,7 @@ function createTileSprites () {
         e e e e e e e e e e e e e e e e 
         c c c c c c c c c c c c c c c c 
         `, SpriteKind.Player)
-    roofLeft = sprites.create(img`
+    roofLeft1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -268,7 +286,7 @@ function createTileSprites () {
         . . . . . . . . . . . . . . . c 
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Player)
-    roofRight = sprites.create(img`
+    roofRight1 = sprites.create(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -291,6 +309,8 @@ function setBackground () {
     tiles.setCurrentTilemap(tilemap`level1`)
     scene.cameraFollowSprite(heroBat)
     createTileSprites()
+    createTileSprites2()
+    createTileSprites3()
     placeTileSprites()
 }
 // creates or resets items
@@ -341,6 +361,152 @@ function setArrays () {
     "I don't like this."
     ]
 }
+function createTileSprites3 () {
+    topRoofMiddle3 = sprites.create(img`
+        . . . . . . c c c c . . . . . . 
+        . . . . . c e 4 5 e c . . . . . 
+        . . . . c 2 e 4 5 e 2 c . . . . 
+        . . . c 4 2 e 4 4 e 2 2 c . . . 
+        . . c e 2 2 e 4 5 e 2 4 e c . . 
+        . c 2 e 4 2 e 4 4 e 2 2 e 2 c . 
+        c 4 2 e 2 2 e 4 5 e 2 4 e 2 2 c 
+        e 2 2 e 4 2 e 4 4 e 2 2 e 2 4 e 
+        e 4 2 e 2 2 e c c e 2 4 e 2 2 e 
+        e 2 2 e 4 2 c e 4 c 2 2 e 2 4 e 
+        e 4 2 e 2 c 4 e e e c 4 e 2 2 e 
+        e 2 2 e c e e c c e 4 c e 2 4 e 
+        e 4 2 c 4 e c e c c e 4 c 2 2 e 
+        e 2 c 4 e c e c e c c e e c 4 e 
+        e c 4 e c c e e e e e c e 4 c e 
+        c e e c c c c c c c c c c e 4 c 
+        `, SpriteKind.Player)
+    topRoofLeft3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . c 4 2 
+        . . . . . . . . . . . . c e 2 2 
+        . . . . . . . . . . . c 2 e 4 2 
+        . . . . . . . . . . c 2 2 e 2 2 
+        . . . . . . . . . c e 4 2 e 4 2 
+        . . . . . . . . c 2 e 2 2 e 2 2 
+        . . . . . . . c 2 2 e 4 2 e 4 2 
+        `, SpriteKind.Player)
+    topRoofRight3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        2 4 c . . . . . . . . . . . . . 
+        2 2 e c . . . . . . . . . . . . 
+        2 4 e 2 c . . . . . . . . . . . 
+        2 2 e 2 2 c . . . . . . . . . . 
+        2 4 e 2 4 e c . . . . . . . . . 
+        2 2 e 2 2 e 2 c . . . . . . . . 
+        2 4 e 2 4 e 2 2 c . . . . . . . 
+        `, SpriteKind.Player)
+    middleRoofLeft3 = sprites.create(img`
+        . . . . . . c e 4 2 e 2 2 e 2 c 
+        . . . . . c 2 e 2 2 e 4 2 e c 4 
+        . . . . c 4 2 e 4 2 e 2 c c 4 e 
+        . . . c e 2 2 e 2 2 e c 4 4 e c 
+        . . c 2 e 4 2 e 4 2 c 4 e e c c 
+        . c 2 2 e 2 2 e 2 c 4 e c c c 4 
+        c e 4 2 e 4 2 c c 4 e c e c e e 
+        2 e 2 2 e 2 c 4 4 e c e c e e e 
+        2 e 4 2 e c 4 e e c c c e e e e 
+        2 e 2 2 c 4 e c c c e e e e e e 
+        2 e c c 4 e c c c c c c c c c c 
+        2 c 4 4 e c 4 c 4 4 4 4 4 4 4 4 
+        c 4 e e c c e e e e e e e e e e 
+        4 e c c c e e e e e e e e e e e 
+        e c e c e e e e e e e e e e e e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    middleRoofRight3 = sprites.create(img`
+        c 2 e 2 2 e 2 4 e c . . . . . . 
+        4 c e 2 4 e 2 2 e 2 c . . . . . 
+        e 4 c c 2 e 2 4 e 2 4 c . . . . 
+        c e 4 4 c e 2 2 e 2 2 e c . . . 
+        c c e e 4 c 2 4 e 2 4 e 2 c . . 
+        4 c c c e 4 c 2 e 2 2 e 2 2 c . 
+        e e c e c e 4 c c 2 4 e 2 4 e c 
+        e e e c e c e 4 4 c 2 e 2 2 e 2 
+        e e e e c c c e e 4 c e 2 4 e 2 
+        e e e e e e c c c e 4 c 2 2 e 2 
+        c c c c c c c c c c e 4 c c e 2 
+        4 4 4 4 4 4 4 4 c 4 c e 4 4 c 2 
+        e e e e e e e e e e c c e e 4 c 
+        e e e e e e e e e e e c c c e 4 
+        e e e e e e e e e e e e c e c e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    middleRoof3 = sprites.create(img`
+        e c c 4 4 4 4 4 4 4 4 4 4 c 4 c 
+        e c e e e e e e e e e e e c c e 
+        c c e e e e b b b b e e e e e c 
+        e e e e b b 9 9 9 6 b b e e e e 
+        c c c b 9 1 9 9 9 9 9 6 b c c c 
+        4 4 4 b 9 9 1 9 9 9 9 9 c 4 4 4 
+        e e b 9 9 9 1 1 9 9 9 9 6 c e e 
+        e e b 9 9 9 9 9 1 9 9 9 6 c e e 
+        e e c 9 9 1 1 9 9 1 1 9 9 c e e 
+        e e c 6 9 9 1 1 9 9 1 9 9 c e e 
+        c c c c 6 9 9 9 1 9 9 9 c c c c 
+        4 4 4 c 6 6 9 9 9 9 9 9 c 4 4 4 
+        e e e e c c 6 9 9 9 c c e e e e 
+        e e e e e e c c c c e e e e e e 
+        e e e e e e e e e e e e e e e e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    roofLeft3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    roofRight3 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.tileThing)
+}
 function createBurger () {
     burger = sprites.create(img`
         . . . . c c c b b b b b . . . . 
@@ -384,6 +550,152 @@ function createCake () {
         `, SpriteKind.Item)
     tiles.placeOnTile(cake, tiles.getTileLocation(27, 17))
     hasCake = false
+}
+function createTileSprites2 () {
+    topRoofMiddle2 = sprites.create(img`
+        . . . . . . c c c c . . . . . . 
+        . . . . . c e 4 5 e c . . . . . 
+        . . . . c 2 e 4 5 e 2 c . . . . 
+        . . . c 4 2 e 4 4 e 2 2 c . . . 
+        . . c e 2 2 e 4 5 e 2 4 e c . . 
+        . c 2 e 4 2 e 4 4 e 2 2 e 2 c . 
+        c 4 2 e 2 2 e 4 5 e 2 4 e 2 2 c 
+        e 2 2 e 4 2 e 4 4 e 2 2 e 2 4 e 
+        e 4 2 e 2 2 e c c e 2 4 e 2 2 e 
+        e 2 2 e 4 2 c e 4 c 2 2 e 2 4 e 
+        e 4 2 e 2 c 4 e e e c 4 e 2 2 e 
+        e 2 2 e c e e c c e 4 c e 2 4 e 
+        e 4 2 c 4 e c e c c e 4 c 2 2 e 
+        e 2 c 4 e c e c e c c e e c 4 e 
+        e c 4 e c c e e e e e c e 4 c e 
+        c e e c c c c c c c c c c e 4 c 
+        `, SpriteKind.Player)
+    topRoofLeft2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . c 4 2 
+        . . . . . . . . . . . . c e 2 2 
+        . . . . . . . . . . . c 2 e 4 2 
+        . . . . . . . . . . c 2 2 e 2 2 
+        . . . . . . . . . c e 4 2 e 4 2 
+        . . . . . . . . c 2 e 2 2 e 2 2 
+        . . . . . . . c 2 2 e 4 2 e 4 2 
+        `, SpriteKind.Player)
+    topRoofRight2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        2 4 c . . . . . . . . . . . . . 
+        2 2 e c . . . . . . . . . . . . 
+        2 4 e 2 c . . . . . . . . . . . 
+        2 2 e 2 2 c . . . . . . . . . . 
+        2 4 e 2 4 e c . . . . . . . . . 
+        2 2 e 2 2 e 2 c . . . . . . . . 
+        2 4 e 2 4 e 2 2 c . . . . . . . 
+        `, SpriteKind.Player)
+    middleRoofLeft2 = sprites.create(img`
+        . . . . . . c e 4 2 e 2 2 e 2 c 
+        . . . . . c 2 e 2 2 e 4 2 e c 4 
+        . . . . c 4 2 e 4 2 e 2 c c 4 e 
+        . . . c e 2 2 e 2 2 e c 4 4 e c 
+        . . c 2 e 4 2 e 4 2 c 4 e e c c 
+        . c 2 2 e 2 2 e 2 c 4 e c c c 4 
+        c e 4 2 e 4 2 c c 4 e c e c e e 
+        2 e 2 2 e 2 c 4 4 e c e c e e e 
+        2 e 4 2 e c 4 e e c c c e e e e 
+        2 e 2 2 c 4 e c c c e e e e e e 
+        2 e c c 4 e c c c c c c c c c c 
+        2 c 4 4 e c 4 c 4 4 4 4 4 4 4 4 
+        c 4 e e c c e e e e e e e e e e 
+        4 e c c c e e e e e e e e e e e 
+        e c e c e e e e e e e e e e e e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    middleRoofRight2 = sprites.create(img`
+        c 2 e 2 2 e 2 4 e c . . . . . . 
+        4 c e 2 4 e 2 2 e 2 c . . . . . 
+        e 4 c c 2 e 2 4 e 2 4 c . . . . 
+        c e 4 4 c e 2 2 e 2 2 e c . . . 
+        c c e e 4 c 2 4 e 2 4 e 2 c . . 
+        4 c c c e 4 c 2 e 2 2 e 2 2 c . 
+        e e c e c e 4 c c 2 4 e 2 4 e c 
+        e e e c e c e 4 4 c 2 e 2 2 e 2 
+        e e e e c c c e e 4 c e 2 4 e 2 
+        e e e e e e c c c e 4 c 2 2 e 2 
+        c c c c c c c c c c e 4 c c e 2 
+        4 4 4 4 4 4 4 4 c 4 c e 4 4 c 2 
+        e e e e e e e e e e c c e e 4 c 
+        e e e e e e e e e e e c c c e 4 
+        e e e e e e e e e e e e c e c e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    middleRoof2 = sprites.create(img`
+        e c c 4 4 4 4 4 4 4 4 4 4 c 4 c 
+        e c e e e e e e e e e e e c c e 
+        c c e e e e b b b b e e e e e c 
+        e e e e b b 9 9 9 6 b b e e e e 
+        c c c b 9 1 9 9 9 9 9 6 b c c c 
+        4 4 4 b 9 9 1 9 9 9 9 9 c 4 4 4 
+        e e b 9 9 9 1 1 9 9 9 9 6 c e e 
+        e e b 9 9 9 9 9 1 9 9 9 6 c e e 
+        e e c 9 9 1 1 9 9 1 1 9 9 c e e 
+        e e c 6 9 9 1 1 9 9 1 9 9 c e e 
+        c c c c 6 9 9 9 1 9 9 9 c c c c 
+        4 4 4 c 6 6 9 9 9 9 9 9 c 4 4 4 
+        e e e e c c 6 9 9 9 c c e e e e 
+        e e e e e e c c c c e e e e e e 
+        e e e e e e e e e e e e e e e e 
+        c c c c c c c c c c c c c c c c 
+        `, SpriteKind.Player)
+    roofLeft2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . c 4 
+        . . . . . . . . . . . . . . c 2 
+        . . . . . . . . . . . . . . . c 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Player)
+    roofRight2 = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        4 c . . . . . . . . . . . . . . 
+        2 c . . . . . . . . . . . . . . 
+        c . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.tileThing)
 }
 // talk to friend sprite
 function talkFriend (who: Sprite, food: boolean, done: boolean, meet: boolean) {
@@ -471,14 +783,30 @@ let questsDone = 0
 let snakeDone = false
 let duckDone = false
 let ghostDone = false
-let roofLeft: Sprite = null
-let roofRight: Sprite = null
-let middleRoof: Sprite = null
-let middleRoofRight: Sprite = null
-let middleRoofLeft: Sprite = null
-let topRoofRight: Sprite = null
-let topRoofLeft: Sprite = null
-let topRoofMiddle: Sprite = null
+let roofLeft3: Sprite = null
+let roofRight3: Sprite = null
+let middleRoof3: Sprite = null
+let middleRoofRight3: Sprite = null
+let middleRoofLeft3: Sprite = null
+let topRoofRight3: Sprite = null
+let topRoofLeft3: Sprite = null
+let topRoofMiddle3: Sprite = null
+let roofLeft2: Sprite = null
+let roofRight2: Sprite = null
+let middleRoof2: Sprite = null
+let middleRoofRight2: Sprite = null
+let middleRoofLeft2: Sprite = null
+let topRoofRight2: Sprite = null
+let topRoofLeft2: Sprite = null
+let topRoofMiddle2: Sprite = null
+let roofLeft1: Sprite = null
+let roofRight1: Sprite = null
+let middleRoof1: Sprite = null
+let middleRoofRight1: Sprite = null
+let middleRoofLeft1: Sprite = null
+let topRoofRight1: Sprite = null
+let topRoofLeft1: Sprite = null
+let topRoofMiddle1: Sprite = null
 let hasCake = false
 let hasPizza = false
 let hasBurger = false
