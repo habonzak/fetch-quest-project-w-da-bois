@@ -55,6 +55,8 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
         game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding pizza.")
     } else if (hasCake == true && snakeDone == false) {
         game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding cake.")
+    } else if (questsDone == 3) {
+        game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "Go to the top right corner to win!")
     } else {
         game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding nothing.")
     }
@@ -749,6 +751,15 @@ function talkFriend (who: Sprite, food: boolean, done: boolean, meet: boolean) {
         heroBat.setFlag(SpriteFlag.Ghost, false)
     }
 }
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleInsignia, function (sprite, location) {
+    if (controller.A.isPressed()) {
+        if (questsDone < 3) {
+            game.showLongText("Come back when you're done with all 3 quests.", DialogLayout.Center)
+        } else if (questsDone == 3) {
+            game.over(true)
+        }
+    }
+})
 let rejectText: string[] = []
 let friendText: string[] = []
 let talkSnake = false
