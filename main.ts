@@ -3,7 +3,6 @@ namespace SpriteKind {
     export const Item = SpriteKind.create()
     export const tileThing = SpriteKind.create()
 }
-// picking up items
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Item, function (sprite, otherSprite) {
     if (currentItem == true) {
         otherSprite.sayText("no picking up more than one item!", 500, false)
@@ -47,7 +46,6 @@ function placeTileSprites () {
     tiles.placeOnTile(roofRight3, tiles.getTileLocation(4, 1))
     tiles.placeOnTile(roofLeft3, tiles.getTileLocation(0, 1))
 }
-// checks completed quests
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (hasBurger == true && ghostDone == false) {
         game.splash("You have " + convertToText(questsDone) + "/3 quests done.", "You are holding a burger.")
@@ -131,7 +129,6 @@ function setSprites () {
     tiles.placeOnTile(snakeFriend, tiles.getTileLocation(2, 3))
 }
 function setPresets () {
-    // set variables
     questsDone = 0
     currentItem = false
     ghostDone = false
@@ -294,7 +291,6 @@ function setBackground () {
     createTileSprites3()
     placeTileSprites()
 }
-// creates or resets items
 function createPizza () {
     pizza = sprites.create(img`
         . . . . . . b b b b . . . . . . 
@@ -679,14 +675,9 @@ function createTileSprites2 () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.tileThing)
 }
-// talk to friend sprite
 function talkFriend (who: Sprite, food: boolean, done: boolean, meet: boolean) {
     if (heroBat.overlapsWith(who) && controller.A.isPressed()) {
         heroBat.setFlag(SpriteFlag.Ghost, true)
-        // has item, has not talked to sprite yet
-        // giving item to sprite
-        // has no items
-        // has wrong item
         if (meet == false && food == true) {
             if (who == ghostFriend) {
                 who.sayText("Please bring me a burger.", 500, false)
@@ -810,7 +801,6 @@ setArrays()
 for (let value of introText) {
     game.showLongText(value, DialogLayout.Center)
 }
-// initialize sprites
 heroBat = sprites.create(img`
     . . f f f . . . . . . . . f f f 
     . f f c c . . . . . . f c b b c 
@@ -835,7 +825,6 @@ setPresets()
 createBurger()
 createPizza()
 createCake()
-// calls functions
 game.onUpdate(function () {
     talkFriend(ghostFriend, hasBurger, ghostDone, talkGhost)
     talkFriend(duckFriend, hasPizza, duckDone, talkDuck)
