@@ -686,7 +686,7 @@ function talkFriend (who: Sprite, food: boolean, done: boolean, meet: boolean) {
                 who.sayText("I want pizza!", 500, false)
                 talkDuck = true
             } else if (who == snakeFriend) {
-                who.sayText("Get me a cake ssslice...", 500, false)
+                who.sayText("GIVE ME CAKE!", 500, false)
                 talkSnake = true
             }
             pause(200)
